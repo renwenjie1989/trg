@@ -5,7 +5,7 @@
                 <div class="col-md-12 columns">
 					<nav class="navbar navbar-default gfx-mega nav-left" role="navigation">
 						<div class="navbar-header">
-							<a class="navbar-toggle" data-toggle="collapse" data-target="#gfx-collapse"></a>
+							<a v-on:click="dropAll" class="navbar-toggle" v-bind:class="{'collapsed': isAllDrop}" data-toggle="collapse" data-target="#gfx-collapse"></a>
             				<div class="logo" id="logo">
            	    				<a href="index.html">
            	    					<!-- <img v-attr="src: logoUrl"> -->
@@ -14,7 +14,7 @@
                 			</div>
 						</div>
 
-						<div class="collapse navbar-collapse" id="gfx-collapse">
+						<div class="collapse navbar-collapse" v-bind:class="{'in': !isAllDrop}" id="gfx-collapse">
 							<ul class="nav navbar-nav gfx-nav">
 								<li><a href="index.html">Home</a></li>
 								<li class="dropdown" v-bind:class="{'open': isDropdown}"><a v-on:click="drop" href="#" data-toggle="dropdown" class="dropdown-toggle">Services <b class="caret"></b></a>
@@ -45,14 +45,17 @@
 export default {
 	data () {
 		return {
+			isAllDrop: true,
 			isDropdown: false,
 			logoUrl: "trg.png"
 		}
 	},
 	methods: {
 		drop: function (){
-			alert("haha");
-			isDropdown = true;
+			this.isDropdown = !this.isDropdown;
+		},
+		dropAll: function(){
+			this.isAllDrop = !this.isAllDrop;
 		}
 	}
 }
